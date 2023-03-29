@@ -1,0 +1,88 @@
+server:
+  port: 1228
+  max-http-header-size: 8192
+  tomcat:
+    threads:
+      max: 6
+spring:
+  resources:
+    static-locations: classpath:/static
+  application:
+    name: Software-Examin
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.3.47:3306/soft_examin?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: laison!@#
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-test-query: SELECT 1
+#  profiles:
+#    active: dev
+  redis:
+    host: 192.168.3.47
+    password:
+    port: 6379
+    timeout: 10s
+    database: 2
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    servlet:
+      load-on-startup: 1
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+
+  thymeleaf:
+    cache: false
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+mybatis:
+  type-aliases-package: com.laison.softwareproject.model
+  mapper-locations: classpath:/mappers/*
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+logging:
+  level:
+    root: info
+    '[com.laison.nlapis.dao]': info #???sql??debug
+    '[com.laison]': info
+    '[org.redisson]': info
+  file:
+    path: logs/nlapis.log
+
+####??? ConfigConstant zh_CN en_US ####
+config:
+  sysDbVersion: 1
+  default:
+    social:
+      weixin:
+        provider_id: weixin
+        app_id: wxfd6965ab1fc6adb2
+        app_secret: 66bb4566de776ac699ec1dbed0cc3dd1
+        url_authorize: https://open.weixin.qq.com/connect/qrconnect
+        url_accesstoken: https://api.weixin.qq.com/sns/oauth2/access_token
+#????
+laison:
+  signatureSecret: dd05f1c54d63749eda95f9fa6d49v442a
